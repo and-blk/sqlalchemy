@@ -15,21 +15,16 @@ def db_create(engine):
         create_database(url=engine.url)
 
 
-def table_create(engine):
-    Base.metadata.create_all(engine)
-    print('tables have been created')
-
-
 if __name__ == '__main__':
-    from tables import InfoTable, DataTable
+    from tables import InfoTable, DataTable, table_create
     db_create(engine=engine)
     table_create(engine=engine)
-    list_variables = [{'name123': 'mummy', 'phone': 534534}, {'name': 'mummy', 'phone': 534534}, 
+    
+    # list_variables = [{'name': 'mummy'}, {'name': 'mummy'}, 
+    #                     {'name': 'daddy'}, {'name': 'grandf'},
+    #                     {'name': 'grandm'}]
+    list_variables = [{'name': 'mummy', 'phone': 534534}, {'name': 'mummy', 'phone': 534534}, 
                         {'name': 'daddy', 'phone': 22222}, {'name': 'grandf', 'phone': 00000},
                         {'name': 'grandm', 'phone': 2322312}]
-    # list_variables = [{'data': 'mummy', 'phone': 534534}, {'data': 'mummy', 'phone': 534534}, 
-    #                     {'data': 'daddy', 'phone': 22222}, {'data': 'grandf', 'phone': 00000},
-    #                     {'data': 'grandm', 'phone': 2322312}]
-    res = map(lambda x: InfoTable(x).delete(), list_variables)
+    res = map(lambda x: DataTable(x).write(), list_variables)
     print(*list(res))
-    # print(base)
