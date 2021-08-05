@@ -1,4 +1,3 @@
-import inspect
 from db import Base, session
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.exc import ProgrammingError

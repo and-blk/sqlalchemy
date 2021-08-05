@@ -3,9 +3,10 @@ from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy import Column, Integer, String, create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+import os
 
 Base = declarative_base()
-engine = create_engine('postgresql+psycopg2://postgres:pass@localhost/test_db')
+engine = create_engine(f'postgresql+psycopg2://{os.environ["PNAME"]}:{os.environ["PPASS"]}@{os.environ["PHOSTNAME"]}/{os.environ["DBNAME"]}')
 Session = sessionmaker(engine)
 session = Session()
 
@@ -28,3 +29,4 @@ if __name__ == '__main__':
                         {'name': 'grandm', 'phone': 2322312}]
     res = map(lambda x: DataTable(x).write(), list_variables)
     print(*list(res))
+
